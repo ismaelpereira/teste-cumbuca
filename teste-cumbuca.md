@@ -75,6 +75,7 @@ npm i nodemon -D
   - [ ] Envia um JSON com o id do usuário e com o saldo
 - [ ] Criar Model de Transaction
 - [ ] Cria Controller de CRUD das Transactions
+- [ ] Cria pasta Usecases e adiciona uma função para transferir dinheiro
 - [ ] Criar rota `post user/send/:id/` com um body com o id do usuário logado e o valor desejado.
   - [ ] Checa se o Bearer é igual ao token de autenticação.
   - [ ] Verifica se o usuário tem saldo suficiente
@@ -137,16 +138,18 @@ app.get("/user/:id", function (req, res) {
 
 - src
   - db
-  - dal
-    - User.ts
-    - Transaction.ts
-  - model
-    - User.ts
-    - Transaction.ts
+    - dal
+      - User.ts
+      - Transaction.ts
+    - model
+      - User.ts
+      - Transaction.ts
   - api
-  - routes
-    - router.ts
-    - users.ts
+    - routes
+      - router.ts
+      - users.ts
+    - usecases
+      - CreateNewTransaction.ts
   - middleware
   - auth.ts
   - index.ts
