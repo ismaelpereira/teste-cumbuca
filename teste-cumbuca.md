@@ -57,16 +57,18 @@ npm i nodemon -D
 
 ### Sem autenticação
 
-- [ ] Criar aplicação com Typescript
-- [ ] Instalar Express
-- [ ] Instalar Sequelize
-- [ ] Criar Model do User
-- [ ] Criar Controller de CRUD do User
+- [x] Criar aplicação com Typescript
+- [x] Instalar Express
+- [x] Instalar Sequelize
+- [x] Fazer conexão com o banco de dados
+- [x] Criar Model do User
+- [x] Criar Controller de CRUD do User
 - [ ] Criar rota `post user/register` que cria o usuário no banco com um JWT token
   - [ ] JWTSign
   - [ ] Cria um usuário no banco com o token já criado
   - [ ] Cria middleware de autenticação
-- [ ] Criar rota `get user/auth` que retornar a key -[ ] Retorna o id do usuário e o token
+- [ ] Criar rota `get user/auth`
+  - [ ] Retorna o id do usuário e o token
 
 ### Com autenticação
 
@@ -151,5 +153,5 @@ app.get("/user/:id", function (req, res) {
     - usecases
       - CreateNewTransaction.ts
   - middleware
-  - auth.ts
-  - index.ts
+    - auth.ts
+    - index.ts
