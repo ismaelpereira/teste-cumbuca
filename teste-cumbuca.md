@@ -64,8 +64,8 @@ npm i nodemon -D
 - [x] Criar Model do User
 - [x] Criar Controller de CRUD do User
 - [ ] Criar rota `post user/register` que cria o usuário no banco com um JWT token
-  - [ ] JWTSign
-  - [ ] Cria um usuário no banco com o token já criado
+  - [x] JWTSign
+  - [x] Cria um usuário no banco com o token já criado
   - [ ] Cria middleware de autenticação
 - [ ] Criar rota `get user/auth`
   - [ ] Retorna o id do usuário e o token

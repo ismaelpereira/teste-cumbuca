@@ -1,4 +1,4 @@
-import { Dialect, Sequelize } from "sequelize/types";
+import { Dialect, Sequelize } from "sequelize";
 
 require("dotenv").config();
 

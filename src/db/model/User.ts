@@ -1,4 +1,4 @@
-import { DataTypes, Model, Optional } from "sequelize/types";
+import { DataTypes, Model, Optional } from "sequelize";
 import { sequelizeConnection } from "../config";
 
 interface IUser {
@@ -7,7 +7,8 @@ interface IUser {
   CPF: string;
   balance: number;
   token: string;
-  createdAt: string;
+  createdAt: Date;
+  updatedAt: Date;
 }
 
 class User extends Model implements IUser {
@@ -16,7 +17,8 @@ class User extends Model implements IUser {
   public CPF!: string;
   public balance!: number;
   public token!: string;
-  public readonly createdAt!: string;
+  public readonly createdAt!: Date;
+  public readonly updatedAt!: Date;
 }
 
 export interface UserInput extends Optional<IUser, "ID"> {}
@@ -29,17 +31,23 @@ User.init(
       type: DataTypes.STRING,
       primaryKey: true,
     },
-    full_Name: {
+    fullName: {
       type: DataTypes.STRING,
     },
     CPF: {
       type: DataTypes.STRING,
     },
     balance: {
-      type: DataTypes.NUMBER,
+      type: DataTypes.INTEGER,
     },
     token: {
       type: DataTypes.STRING,
+    },
+    createdAt: {
+      type: DataTypes.DATE,
+    },
+    updatedAt: {
+      type: DataTypes.DATE,
     },
   },
   {

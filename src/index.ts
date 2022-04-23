@@ -19,10 +19,11 @@ app.post("/register", (req, res) => {
   const ID = crypto.randomUUID();
   const token = createToken(ID);
   createUser({
-    id: ID,
+    ID: ID,
     ...user,
     token: token,
     createdAt: new Date(),
+    updatedAt: new Date(),
   }).then((user) => res.status(201).send(user));
 });
 
