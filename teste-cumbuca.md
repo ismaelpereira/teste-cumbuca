@@ -82,14 +82,13 @@ npm i nodemon -D
   - [x] Verifica se o usuário tem saldo suficiente
   - [x] Cria transação
   - [x] Transfere o dinheiro
-- [ ] Cria rota `post user/refound/:id/:transactionId` que estorna a transação
-  - [ ] Procura a transação
-  - [ ] Verifica se `alreadyRefounded` é `false`
-  - [ ] Verifica se o usuário que criou a transação
-  - [ ] Verifica se ambos os usuários ainda existem
-  - [ ] Tira o valor do receiver
-  - [ ] Adiciona o valor no sender
-  - [ ] Atualiza a `alreadyRefounded` para `true`
+- [x] Cria rota `post user/refound/:id/:transactionId` que estorna a transação
+  - [x] Procura a transação
+  - [x] Verifica se `alreadyRefounded` é `false`
+  - [x] Verifica se ambos os usuários ainda existem
+  - [x] Tira o valor do receiver
+  - [x] Adiciona o valor no sender
+  - [x] Atualiza a `alreadyRefounded` para `true`
 - [ ] Cria rota `get user/:id/transactions/?startDate=XXXXX&?endDate=XXXXXX` que recebe uma data inicial e uma final, no formato `YYYY-MM-DD` e filtra as transações daquele usuário
 
   - [ ] Cria dal `filterTransactionsByDate`

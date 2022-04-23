@@ -64,11 +64,13 @@ userRouter.post("/:id/refound/:transactionId", verifyToken, (req, res) => {
   const transactionId = req.params.transactionId;
   const id = req.params.id;
 
-  findUserById(id).catch(() => {
-    throw new Error("User does not exist");
-  });
+  findUserById(id)
+    .then((transaction) => {})
+    .catch(() => {
+      throw new Error("User does not exist");
+    });
 
-  refoundTransaction(transactionId);
+  refoundTransaction(transactionId, id);
 
   updateTransaction(transactionId, {
     alreadyRefounded: true,
