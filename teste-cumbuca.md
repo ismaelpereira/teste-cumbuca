@@ -73,27 +73,27 @@ npm i nodemon -D
 
 ### Com autenticação
 
-- [ ] Criar rota `get user/balance/:id` que retorna o saldo do usuário logado
-  - [x] Checa se o Bearer é igual ao token de autenticação.
+- [x] Criar rota `get user/balance/:id` que retorna o saldo do usuário logado
   - [x] Envia um JSON com o id do usuário e saldo com o saldo
-- [ ] Criar Model de Transaction
-- [ ] Cria Controller de CRUD das Transactions
-- [ ] Cria pasta Usecases e adiciona uma função para transferir dinheiro
-- [ ] Criar rota `post user/send/:id/` com um body com o id do usuário logado e o valor desejado.
-  - [ ] Checa se o Bearer é igual ao token de autenticação.
-  - [ ] Verifica se o usuário tem saldo suficiente
-  - [ ] Cria transação
-  - [ ] Transfere o dinheiro
-- [ ] Cria rota `post user/reverse/:id/:transactionId` que estorna a transação
-  - [ ] Checa se o Bearer é igual ao token de autenticação.
+- [x] Criar Model de Transaction
+- [x] Cria Controller de CRUD das Transactions
+- [x] Cria pasta Usecases e adiciona uma função para transferir e estornar
+- [x] Criar rota `post user/transfer/:id/?receiver=XXXXXXXX&?amount=XXXX` com o id do usuário logado, usuário que vai receber e o valor desejado.
+  - [x] Verifica se o usuário tem saldo suficiente
+  - [x] Cria transação
+  - [x] Transfere o dinheiro
+- [ ] Cria rota `post user/refound/:id/:transactionId` que estorna a transação
   - [ ] Procura a transação
-  - [ ] Verifica se `alreadyReversed` é `false`
+  - [ ] Verifica se `alreadyRefounded` é `false`
   - [ ] Verifica se o usuário que criou a transação
   - [ ] Verifica se ambos os usuários ainda existem
   - [ ] Tira o valor do receiver
   - [ ] Adiciona o valor no sender
-  - [ ] Atualiza a `alreadyReversed` para `true`
+  - [ ] Atualiza a `alreadyRefounded` para `true`
 - [ ] Cria rota `get user/:id/transactions/?startDate=XXXXX&?endDate=XXXXXX` que recebe uma data inicial e uma final, no formato `YYYY-MM-DD` e filtra as transações daquele usuário
+
+  - [ ] Cria dal `filterTransactionsByDate`
+  - [ ] Implementa a rota
 
   ```js
     Transactions.findAll({
@@ -109,7 +109,7 @@ npm i nodemon -D
 
 ## Observações
 
-- Utilizar Query String na requisição da transação
+- Utilizar Query String nas requisições da transação
 
 ```js
 //get query&params in express

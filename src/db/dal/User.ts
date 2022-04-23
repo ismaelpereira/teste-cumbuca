@@ -8,15 +8,23 @@ export const createUser = async (payload: UserInput): Promise<UserOutput> => {
 export const findUserById = async (id: string): Promise<UserOutput> => {
   const user = await User.findByPk(id);
 
-  if (user === null) {
+  if (!user) {
     throw new Error("User not found");
   }
 
   return user;
 };
 
+export const findUserByCPF = async (CPF: string): Promise<UserOutput> => {
+  const user = await User.findOne({ where: { CPF } });
+  if (!user) {
+    return null as unknown as User;
+  }
+  return user;
+};
+
 export const getAllUsers = async (): Promise<UserOutput[]> => {
-  return User.findAll();
+  return await User.findAll();
 };
 
 export const updateUser = async (
@@ -25,7 +33,7 @@ export const updateUser = async (
 ): Promise<UserOutput> => {
   const user = await User.findByPk(id);
 
-  if (user === null) {
+  if (!user) {
     throw new Error("User not found");
   }
 
@@ -38,12 +46,4 @@ export const deleteUser = async (id: string): Promise<boolean> => {
     where: { id },
   });
   return !!deletedUser;
-};
-
-export const findUserByCPF = async (CPF: string): Promise<UserOutput> => {
-  const user = await User.findOne({ where: { CPF } });
-  if (!user) {
-    return null as unknown as User;
-  }
-  return user;
 };
