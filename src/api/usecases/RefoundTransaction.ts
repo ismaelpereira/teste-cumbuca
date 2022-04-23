@@ -1,7 +1,7 @@
 import { findTransactionById } from "../../db/dal/Transaction";
-import { TransferMoney } from "./TransferMoney";
+import { transferMoney } from "./TransferMoney";
 
-export const RefoundTransaction = (transactionId: string) => {
+export const refoundTransaction = (transactionId: string) => {
   const transaction = findTransactionById(transactionId).then((transaction) => {
     if (!transaction) {
       throw new Error("Transaction not found");
@@ -9,10 +9,11 @@ export const RefoundTransaction = (transactionId: string) => {
     if (transaction.alreadyRefounded) {
       throw new Error("Transaction already refounded");
     }
-    TransferMoney(
+    transferMoney(
       transaction.receiverID,
       transaction.senderID,
-      transaction.amount
+      transaction.amount,
+      "refound"
     );
   });
 };

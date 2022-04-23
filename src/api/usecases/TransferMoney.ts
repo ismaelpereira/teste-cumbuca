@@ -3,16 +3,18 @@ import * as crypto from "crypto";
 import { createTransaction } from "../../db/dal/Transaction";
 import { findUserById, updateUser } from "../../db/dal/User";
 
-export const TransferMoney = (
+export const transferMoney = (
   senderId: string,
   receiverId: string,
-  amount: number
+  amount: number,
+  type: "transfer" | "refound"
 ) => {
   const sender = findUserById(senderId).then((sender) => {
     if (!sender) {
       throw new Error("Sender not found");
     }
-    if (sender.balance < amount) {
+
+    if (type === "transfer" && sender.balance < amount) {
       throw new Error(
         "User can't transfer money. Reason: Insufficient balance"
       );
