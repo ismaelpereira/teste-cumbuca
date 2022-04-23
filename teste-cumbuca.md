@@ -74,8 +74,8 @@ npm i nodemon -D
 ### Com autenticação
 
 - [ ] Criar rota `get user/balance/:id` que retorna o saldo do usuário logado
-  - [ ] Checa se o Bearer é igual ao token de autenticação.
-  - [ ] Envia um JSON com o id do usuário e com o saldo
+  - [x] Checa se o Bearer é igual ao token de autenticação.
+  - [x] Envia um JSON com o id do usuário e saldo com o saldo
 - [ ] Criar Model de Transaction
 - [ ] Cria Controller de CRUD das Transactions
 - [ ] Cria pasta Usecases e adiciona uma função para transferir dinheiro
