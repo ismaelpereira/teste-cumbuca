@@ -4,7 +4,7 @@ import { findUserById } from "../../db/dal/User";
 
 export const userRouter = Router();
 
-userRouter.get("/:id", (req, res) => {
+userRouter.get("/:id", verifyToken, (req, res) => {
   const id = req.params.id;
   findUserById(id).then((user) => {
     res.status(200).send({

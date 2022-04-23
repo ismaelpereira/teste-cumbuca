@@ -39,3 +39,11 @@ export const deleteUser = async (id: string): Promise<boolean> => {
   });
   return !!deletedUser;
 };
+
+export const findUserByCPF = async (CPF: string): Promise<UserOutput> => {
+  const user = await User.findOne({ where: { CPF } });
+  if (!user) {
+    return null as unknown as User;
+  }
+  return user;
+};

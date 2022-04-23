@@ -4,6 +4,7 @@ import { sequelizeConnection } from "../config";
 interface IUser {
   ID: string;
   fullName: string;
+  password: string;
   CPF: string;
   balance: number;
   token: string;
@@ -14,6 +15,7 @@ interface IUser {
 class User extends Model implements IUser {
   public ID!: string;
   public fullName!: string;
+  public password!: string;
   public CPF!: string;
   public balance!: number;
   public token!: string;
@@ -34,6 +36,9 @@ User.init(
     fullName: {
       type: DataTypes.STRING,
     },
+    password: {
+      type: DataTypes.STRING,
+    },
     CPF: {
       type: DataTypes.STRING,
     },
@@ -41,7 +46,7 @@ User.init(
       type: DataTypes.INTEGER,
     },
     token: {
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT,
     },
     createdAt: {
       type: DataTypes.DATE,

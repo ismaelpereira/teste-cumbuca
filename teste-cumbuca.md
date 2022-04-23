@@ -68,8 +68,8 @@ npm i nodemon -D
   - [x] Cria um usuário no banco com o token já criado
   - [x] Cria middleware de autenticação
 - [x] Criar rota de login
-  - [ ] Rota `/login`
-  - [x] Retorna o id do usuário e o token
+  - [x] Rota `/login`
+  - [x] Retorna o CPF, Senha e token
 
 ### Com autenticação
 
