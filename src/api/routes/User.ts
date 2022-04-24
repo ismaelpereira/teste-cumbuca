@@ -86,34 +86,21 @@ userRouter.get("/:id/transactions", verifyToken, (req, res) => {
   let endDateParam = req.query.endDate?.toString();
   const id = req.params.id;
 
-  console.log("-----Params-----");
-  console.log(startDateParam);
-  console.log(endDateParam);
-  console.log("-----Now-----");
-  console.log(new Date());
-
   if (!startDateParam) {
+    console.log("a");
     startDateParam = Date.now().toString();
   }
   if (!endDateParam) {
+    console.log("b");
     endDateParam = Date.now().toString();
   }
 
-  const unixStartDate = Date.parse(startDateParam);
-  const unixEndDate = Date.parse(endDateParam);
+  const startDate = new Date(startDateParam).toISOString();
+  const endDate = new Date(endDateParam).toISOString();
 
-  const startDate = new Date(unixStartDate);
-  const endDate = new Date(unixEndDate);
-
-  console.log("-----Parse-----");
   console.log(startDate);
   console.log(endDate);
-  console.log("-----Test-----");
-  console.log(Date.parse("2022-04-23T09:30:20"));
-  console.log(Date.parse("2022-04-23 09:45:45"));
-  console.log("-----Unix Test-----");
-  console.log(new Date(unixStartDate));
-  console.log(new Date(unixEndDate));
+
   filterTransactionsByDate(id, startDate, endDate).then((transferences) =>
     res.status(200).send(transferences)
   );

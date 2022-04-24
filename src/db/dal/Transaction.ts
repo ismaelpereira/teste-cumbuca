@@ -23,8 +23,8 @@ export const findTransactionById = async (
 
 export const filterTransactionsByDate = async (
   id: string,
-  startDate: Date,
-  endDate: Date
+  startDate: string,
+  endDate: string
 ): Promise<TransactionOutput[]> => {
   return await Transaction.findAll({
     where: {
