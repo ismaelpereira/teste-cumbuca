@@ -1,6 +1,10 @@
 import { Router } from "express";
 import { verifyToken } from "../../authentication/middleware";
-import { createTransaction, updateTransaction } from "../../db/dal/Transaction";
+import {
+  createTransaction,
+  filterTransactionsByDate,
+  updateTransaction,
+} from "../../db/dal/Transaction";
 import { findUserById } from "../../db/dal/User";
 import { transferMoney } from "../usecases/TransferMoney";
 import * as crypto from "crypto";
@@ -13,7 +17,7 @@ userRouter.get("/balance/:id", verifyToken, (req, res) => {
   findUserById(id).then((user) => {
     res.status(200).send({
       ID: user.ID,
-      balance: `R$: ${(user.balance / 100).toFixed(2)}`,
+      balance: `R$:${(user.balance / 100).toFixed(2)}`,
     });
   });
 });
@@ -75,4 +79,42 @@ userRouter.post("/:id/refound/:transactionId", verifyToken, (req, res) => {
   updateTransaction(transactionId, {
     alreadyRefounded: true,
   }).then((transaction) => res.status(200).send(transaction));
+});
+
+userRouter.get("/:id/transactions", verifyToken, (req, res) => {
+  let startDateParam = req.query.startDate?.toString();
+  let endDateParam = req.query.endDate?.toString();
+  const id = req.params.id;
+
+  console.log("-----Params-----");
+  console.log(startDateParam);
+  console.log(endDateParam);
+  console.log("-----Now-----");
+  console.log(new Date());
+
+  if (!startDateParam) {
+    startDateParam = Date.now().toString();
+  }
+  if (!endDateParam) {
+    endDateParam = Date.now().toString();
+  }
+
+  const unixStartDate = Date.parse(startDateParam);
+  const unixEndDate = Date.parse(endDateParam);
+
+  const startDate = new Date(unixStartDate);
+  const endDate = new Date(unixEndDate);
+
+  console.log("-----Parse-----");
+  console.log(startDate);
+  console.log(endDate);
+  console.log("-----Test-----");
+  console.log(Date.parse("2022-04-23T09:30:20"));
+  console.log(Date.parse("2022-04-23 09:45:45"));
+  console.log("-----Unix Test-----");
+  console.log(new Date(unixStartDate));
+  console.log(new Date(unixEndDate));
+  filterTransactionsByDate(id, startDate, endDate).then((transferences) =>
+    res.status(200).send(transferences)
+  );
 });

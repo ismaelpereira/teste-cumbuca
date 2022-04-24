@@ -18,7 +18,6 @@ export const verifyToken = (
   }
 
   const token = headerToken.split(" ");
-
   try {
     const decodedToken = jwt.verify(token[1], tokenKey);
   } catch (err) {

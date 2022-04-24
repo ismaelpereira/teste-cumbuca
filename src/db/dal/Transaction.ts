@@ -1,3 +1,4 @@
+import { Op } from "sequelize";
 import Transaction, {
   TransactionInput,
   TransactionOutput,
@@ -18,6 +19,21 @@ export const findTransactionById = async (
     throw new Error("Transaction not found");
   }
   return transaction;
+};
+
+export const filterTransactionsByDate = async (
+  id: string,
+  startDate: Date,
+  endDate: Date
+): Promise<TransactionOutput[]> => {
+  return await Transaction.findAll({
+    where: {
+      senderId: id,
+      createdAt: {
+        [Op.between]: [startDate, endDate],
+      },
+    },
+  });
 };
 
 export const findAllTransactions = async (): Promise<TransactionOutput[]> => {
