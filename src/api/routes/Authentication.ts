@@ -13,7 +13,7 @@ authenticationRoutes.post("/register", (req, res) => {
   findUserByCPF(user.CPF).then((user) => {
     if (user) {
       res.status(409).send({
-        message: "User already exists. Please Login",
+        error: "User already exists. Please Login",
       });
       return;
     }

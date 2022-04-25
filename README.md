@@ -1,107 +1,4 @@
-# Desafio de Programação Back-End
-
-Olá e muito obrigado pelo seu interesse na Cumbuca! Somos uma fintech que busca ajudar as pessoas a organizar as finanças junto de quem elas amam, simplificando a vida de nossos usuário e ajudando-os a organizarem-se financeiramente. No âmbito dessa missão, sempre buscamos pessoas excepcionais para nossa equipe. Esperamos ter você a bordo conosco em breve!
-
-Pedimos que leia este documento **inteiro** com atenção para maximizar suas
-chances de sucesso.
-
-O teste que você irá realizar consiste em elaborar um servidor de registro de
-contas e transações financeiras. Esse sistema deve conseguir receber vários
-pedidos de transação **simultaneamente**, registrar de forma persistente o histórico
-de transações e retornar o saldo atual de cada conta. O sistema deve manter
-a todo momento a consistência dos dados fornecidos e ser capaz de escalar de
-forma simples.
-
-## Sobre este documento
-
-- O processo de envio da sua solução e os critérios que serão avaliados pela
-  equipe de tecnologia da Cumbuca estão descritos abaixo, na seção **Avaliação**.
-- A interface que deve ser exposta pelo servidor está descrita na seção **Interface**.
-- As regras que o sistema deve seguir estão descritas na seção **Regras de
-  Negócio**.
-- As descrições de interfaces ocasionalmente referenciam entidades descritas na seção **Entidades**.
-
-Caso não tenha certeza sobre qualquer coisa explicada neste documento (ou
-qualquer dúvida em geral), fique à vontade para enviar um email para
-tech@cumbuca.com com suas dúvidas.
-
-## Avaliação
-
-Seu desafio deverá ser disponibilizado por meio de um repositório Git
-(podendo este ser hosteado da forma que for mais conveniente a você, por
-exemplo usando uma plataforma como GitHub ou GitLab). A única restrição é que
-o repositório deve ser acessível à equipe da Cumbuca. Caso não queira
-disponibilizar seu código publicamente, converse conosco sobre como podemos
-fazer para obter acesso a seu código.
-
-### Critérios
-
-Uma vez que ele seja disponibilizado a nós, a avaliação de seu código será feita de acordo com os seguintes critérios, em ordem aproximada de importância:
-
-#### Ausência de bugs
-
-Seu código deve funcionar corretamente, atendendo a todos os requisitos da especificação representada por este documento. Isso inclui ausência de bugs de concorrência.
-
-##### Consistência Concorrente de Dados
-
-**ATENÇÃO**: Caso esteja realizando este teste para a vaga no nível **Júnior**, este sub-requisito é **opcional**. Para os níveis **Pleno** e **Sênior**, ele é **obrigatório**.
-
-Como parte do critério de Ausência de Bugs, os dados do sistema devem se manter
-sempre consistentes, mesmo sob grande volume de requisições simultâneas.
-Deve ser considerado que o sistema irá ser escalado horizontalmente, portanto
-considere que os dados devem se manter consistentes mesmo sob modificações
-concorrentes.
-
-#### Legibilidade e Formatação
-
-Lembre-se que um trecho de código em geral será lido muito mais vezes do que
-escrito. Escreva seu código pensando em quem for lê-lo. Busque minimizar
-dificuldades de leitura. Use a indentação a seu favor. Siga boas práticas de
-formatação de código da linguagem escolhida.
-
-#### Clareza
-
-Seu código deve deixar a sua intenção clara para o leitor. Tanto quanto seja
-plausível, deve ser possível entender o que o código faz apenas lendo ele.
-Explicações usando comentários deveriam ser redundantes.
-
-#### Desacoplamento
-
-Seu código não deve criar dependências desnecessárias entre módulos.
-Ao alterar uma parte do código, não deveria ser necessário alterar partes sem
-relação lógica com a parte alterada.
-
-#### Extensibilidade
-
-Embora este desafio seja apenas teórico, busque considerar o código que você
-desenvolverá como se ele fosse ser apenas uma parte de uma solução maior. Pense
-no esforço necessário para realizar adições ao seu código e busque
-minimizá-lo.
-
-#### Manutenibilidade
-
-Escreva seu código como se ele fosse ser mantido por muito tempo após você
-criá-lo, por várias pessoas com níveis de experiência variados. Pense no
-esforço necessário para alterar seu código e busque minimizá-lo. Se eu quiser mudar apenas um aspecto do código, precisarei mudar quantas partes dele?
-
-#### Adicionais
-
-**ATENÇÃO**: Caso esteja realizando o teste no nível **Sênior**, a presença de testes unitários e de integração é **obrigatória**.
-
-- Testes unitários e de integração
-- Sistema deployado em algum provedor de cloud
-- Validações e erros bem estruturados
-
-#### Após o desafio técnico
-
-Em geral, iremos avaliar seu código poucos dias após o envio. Uma vez que nossa
-avaliação esteja completa, iremos enviar um feedback sobre sua resolução. Caso
-seu código seja aprovado, além do feedback, iremos marcar uma data para uma
-conversa por videochamada com você.
-
-#### Conversa pós-entrega
-
-Após a entrega de seu desafio, conversaremos com você sobre a estrutura do seu código e as escolhas feitas por você. Esteja pronta(o) para explicar as decisões que tomou e conversar sobre alternativas. Alguns tópicos nos quais iremos tocar (mas não os únicos) serão: escolha de bancos de dados, estruturas de interfaces, arquitetura de código. Além disso, poderemos mudar as condições do desafio e perguntar o que você teria feito diferentemente.
+# Teste Cumbuca - Desafio Back-End
 
 ## Interface
 
@@ -109,23 +6,23 @@ A interface do servidor pode ser realizada através do padrão de API de escolha
 do candidato (alguns exemplos são os padrões REST, GraphQL e gRPC), desde que se atenha aos
 requisitos especificados aqui.
 
-### Funcionalidades
+## Funcionalidades
 
 Independentemente da tecnologia escolhida para realizar a API, a interface exposta
 deve permitir - de forma clara - realizar as operações descritas abaixo. Recomendamos documentar como realizar as operações no README do seu projeto para facilitar os testes que realizaremos.
 
-#### Cadastro de conta
+### Cadastro de conta
 
 Neste endpoint, devem ser enviados os dados de uma conta e ela deve ser cadastrada na base de contas, caso os dados de usuário estejam válidos de acordo com a seção **Regras de negócio**.
 
-#### Autenticação
+### Autenticação
 
 Neste endpoint, devem ser enviados os dados de login de uma conta já cadastrada.
 Esses dados devem ser validados e deve ser retornado um token que será utilizado
 para validar transações do usuário. Nos próximos endpoints, o token deve ser
 enviado para identificar o usuário logado.
 
-#### Cadastro de transação
+### Cadastro de transação
 
 Neste endpoint, devem ser enviados os dados de uma transação e ela deve ser
 cadastrada na base de transações, caso ela seja feita entre contas válidas e
@@ -184,3 +81,87 @@ Adicionalmente, o registro deve conter no mínimo os seguintes dados:
 
 - Data de processamento
 - Identificador único
+
+# Como executar localmente
+
+## Instalação
+
+Você precisará rodar `npm install` para baixar as dependencias. Também será necessário criar um arquivo .env como o exemplo abaixo
+
+```env
+DB_NAME = <Nome do banco de dados>
+DB_USER = <Usuário do banco de dados>
+DB_HOST = <Host do banco de dados, nesse caso localhost ou 127.0.0.1>
+DB_DRIVER = <Qual banco de dado será aceito>
+# O Sequeliza aceita Postgres, MYSQL, MariaDB, SQLite e Microsoft SQL Server
+DB_PASSWORD = <Senha do banco de dados>
+
+JWT_SECRET = <Private key do JWT>
+```
+
+Após esse processo será necessário rodar `npm run start` para iniciar o nodemon.
+
+## Endpoints
+
+### Sem autenticação
+
+`POST /register`
+
+Cadastra o usuário no banco de dados, necessário enviar um JSON como no exemplo abaixo
+
+```json
+{
+  "fullName": "Jhon Doe",
+  "CPF": "123.456.789-10",
+  "password": "123password",
+  "balance": 1000
+}
+```
+
+`POST /login`
+
+Faz o login de um usuário e renova o token JWT de um usuário após expirar. É necessário enviar um body com o CPF e a senha do usuário. Exemplo abaixo:
+
+- _O token expira em 2h_
+
+```json
+{
+  "CPF": "123.456.789-10",
+  "password": "123password"
+}
+```
+
+### Com autenticação
+
+A partir daqui, em todas as rotas é necessário utilizar um Header "authorization". Também é necessário colocar um prefixo "Bearer" antes do token.
+
+`GET /user/:id/balance`
+
+Retorna o saldo em reais do usuário. Para isso o parâmetro `:id` precisa ser o ID de um usuário cadastrado.
+
+`POST /user/:id/transaction`
+
+Realiza uma transação.
+
+Precisa de um parâmetro na query contendo o ID do usuário que irá receber a transação.
+
+- :id => ID do usuário que irá enviar o dinheiro
+
+Parâmetros da query `?receiver=<id do usuário que irá receber>&amount=<valor a ser transferido>`
+
+`POST /user/:id/refound/:transactionId`
+
+Faz um pedido de reembolso em uma transação.
+
+- :id => ID do usuário que enviou o dinheiro
+- :transactionId => ID da transação
+
+`GET /user/:id/transactions`
+
+Filtra as transações feitas pelo usuário por data.
+
+Precisa de pelo menos um parâmetro, a data inicial.
+
+Parâmetros da query `?startDate=<Data inicial | Obrigatório>&endDate=<Data Final | Opcional>`
+
+Se a data final não for iniciada, serão filtradas todas as transferências da data inicial até a data de agora.

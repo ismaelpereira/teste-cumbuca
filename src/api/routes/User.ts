@@ -112,7 +112,10 @@ userRouter.get("/:id/transactions", verifyToken, (req, res) => {
   const id = req.params.id;
 
   if (!startDateParam) {
-    startDateParam = Date.now().toString();
+    res.status(400).send({
+      error: "You need to set an start Date",
+    });
+    return;
   }
   if (!endDateParam) {
     endDateParam = Date.now().toString();
