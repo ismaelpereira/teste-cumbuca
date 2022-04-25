@@ -4,14 +4,14 @@ import { transferMoney } from "./TransferMoney";
 export const refoundTransaction = (transactionId: string, senderId: string) => {
   const transaction = findTransactionById(transactionId).then((transaction) => {
     if (!transaction) {
-      throw new Error("Transaction not found");
+      return new Error("Transaction not found");
     }
     if (transaction.alreadyRefounded) {
-      throw new Error("Transaction already refounded");
+      return new Error("Transaction already refounded");
     }
 
     if (transaction.senderID !== senderId) {
-      throw new Error("You can't refound transactions you do not made!");
+      return new Error("You can't refound transactions you do not made!");
     }
     transferMoney(
       transaction.receiverID,

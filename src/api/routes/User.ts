@@ -45,12 +45,18 @@ userRouter.post("/:id/transaction", verifyToken, (req, res) => {
     .then((sender) => {
       findUserById(receiver)
         .then((receiver) => {
-          transferMoney(
-            sender.ID,
-            receiver.ID,
-            parseInt(amount, 10),
-            "transfer"
-          );
+          try {
+            transferMoney(
+              sender.ID,
+              receiver.ID,
+              parseInt(amount, 10),
+              "transfer"
+            );
+          } catch (err) {
+            res.status(500).send({
+              error: err,
+            });
+          }
           createTransaction({
             ID: crypto.randomUUID(),
             senderID: sender.ID,
@@ -88,9 +94,13 @@ userRouter.post("/:id/refound/:transactionId", verifyToken, (req, res) => {
       });
       return;
     });
-
-  refoundTransaction(transactionId, id);
-
+  try {
+    refoundTransaction(transactionId, id);
+  } catch (err) {
+    res.status(500).send({
+      error: err,
+    });
+  }
   updateTransaction(transactionId, {
     alreadyRefounded: true,
   }).then((transaction) => res.status(200).send(transaction));

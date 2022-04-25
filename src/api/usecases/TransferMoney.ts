@@ -11,17 +11,17 @@ export const transferMoney = (
 ) => {
   const sender = findUserById(senderId).then((sender) => {
     if (!sender) {
-      throw new Error("Sender not found");
+      return new Error("Sender not found");
     }
 
     if (type === "transfer" && sender.balance < amount) {
-      throw new Error(
+      return new Error(
         "User can't transfer money. Reason: Insufficient balance"
       );
     }
     findUserById(receiverId).then((receiver) => {
       if (!receiver) {
-        throw new Error("Receiver not found");
+        return new Error("Receiver not found");
       }
       sender.balance -= amount;
       receiver.balance += amount;
