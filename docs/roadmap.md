@@ -89,7 +89,7 @@ npm i nodemon -D
   - [x] Tira o valor do receiver
   - [x] Adiciona o valor no sender
   - [x] Atualiza a `alreadyRefounded` para `true`
-- [ ] Cria rota `get user/:id/transactions/?startDate=XXXXX&?endDate=XXXXXX` que recebe uma data inicial e uma final, no formato `YYYY-MM-DD` e filtra as transações daquele usuário
+- [X] Cria rota `get user/:id/transactions/?startDate=XXXXX&?endDate=XXXXXX` que recebe uma data inicial e uma final, no formato `YYYY-MM-DD` e filtra as transações daquele usuário
   - [x] Cria dal `filterTransactionsByDate`
   - [x] Implementa a rota
 - [x] Não permitir que um usuário use o token de Outro
