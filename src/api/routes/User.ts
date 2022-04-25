@@ -12,7 +12,7 @@ import { refoundTransaction } from "../usecases/RefoundTransaction";
 
 export const userRouter = Router();
 
-userRouter.get("/balance/:id", verifyToken, (req, res) => {
+userRouter.get("/:id/balance", verifyToken, (req, res) => {
   const id = req.params.id;
   findUserById(id).then((user) => {
     res.status(200).send({
@@ -28,11 +28,17 @@ userRouter.post("/:id/transaction", verifyToken, (req, res) => {
   const amount = req.query.amount?.toString();
 
   if (!receiver) {
-    throw new Error("For this route, you need to set a receiver");
+    res.status(400).send({
+      error: "You need to set a receiver!",
+    });
+    return;
   }
 
   if (!amount) {
-    throw new Error("For this route, you need to set an amout");
+    res.status(400).send({
+      error: "You need to set a amount!",
+    });
+    return;
   }
 
   findUserById(sender)
@@ -56,11 +62,17 @@ userRouter.post("/:id/transaction", verifyToken, (req, res) => {
           }).then((transaction) => res.status(201).send(transaction));
         })
         .catch(() => {
-          throw new Error("Receiver does not exist");
+          res.status(404).send({
+            error: "Sender does not exist",
+          });
+          return;
         });
     })
     .catch(() => {
-      throw new Error("Sender does not exist");
+      res.status(404).send({
+        error: "Receiver does not exist",
+      });
+      return;
     });
 });
 
@@ -71,7 +83,10 @@ userRouter.post("/:id/refound/:transactionId", verifyToken, (req, res) => {
   findUserById(id)
     .then((transaction) => {})
     .catch(() => {
-      throw new Error("User does not exist");
+      res.status(404).send({
+        error: "User does not exist",
+      });
+      return;
     });
 
   refoundTransaction(transactionId, id);
@@ -87,19 +102,14 @@ userRouter.get("/:id/transactions", verifyToken, (req, res) => {
   const id = req.params.id;
 
   if (!startDateParam) {
-    console.log("a");
     startDateParam = Date.now().toString();
   }
   if (!endDateParam) {
-    console.log("b");
     endDateParam = Date.now().toString();
   }
 
   const startDate = new Date(startDateParam).toISOString();
   const endDate = new Date(endDateParam).toISOString();
-
-  console.log(startDate);
-  console.log(endDate);
 
   filterTransactionsByDate(id, startDate, endDate).then((transferences) =>
     res.status(200).send(transferences)

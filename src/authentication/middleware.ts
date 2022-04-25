@@ -4,11 +4,7 @@ import * as jwt from "jsonwebtoken";
 
 const tokenKey = process.env.JWT_SECRET as string;
 
-export const verifyToken = (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
+export const verifyToken = (req: any, res: Response, next: NextFunction) => {
   const headerToken = req.headers.authorization;
   if (!headerToken) {
     return res.status(403).send("Unauthorized");
@@ -19,9 +15,16 @@ export const verifyToken = (
 
   const token = headerToken.split(" ");
   try {
-    const decodedToken = jwt.verify(token[1], tokenKey);
+    const decodedToken = jwt.verify(
+      token[1],
+      tokenKey,
+      (err: any, user: any) => {
+        if (user.id !== req.params.id) {
+          throw new Error("Error, this is not your User token");
+        }
+      }
+    );
   } catch (err) {
-    console.log(err);
     res.status(403).send("Invalid JWT Token");
   }
   next();

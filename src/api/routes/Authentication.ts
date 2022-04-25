@@ -12,7 +12,10 @@ authenticationRoutes.post("/register", (req, res) => {
   const token = createToken(ID, user.password);
   findUserByCPF(user.CPF).then((user) => {
     if (user) {
-      throw new Error("User already Exists. Please Login");
+      res.status(409).send({
+        message: "User already exists. Please Login",
+      });
+      return;
     }
   });
   const encryptedPassword = hashSync(user.password, 10);
@@ -40,10 +43,16 @@ authenticationRoutes.post("/login", (req, res) => {
           token: newToken,
         }).then((user) => res.status(200).send(user));
       } else {
-        throw new Error("CPF or Password does not match");
+        res.status(400).send({
+          error: "CPF or Password does not match",
+        });
+        return;
       }
     })
     .catch(() => {
-      throw new Error("User does not exists. Please register");
+      res.status(400).send({
+        error: "User does not exists. Please register!",
+      });
+      return;
     });
 });

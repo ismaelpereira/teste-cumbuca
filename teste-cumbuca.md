@@ -92,7 +92,7 @@ npm i nodemon -D
 - [ ] Cria rota `get user/:id/transactions/?startDate=XXXXX&?endDate=XXXXXX` que recebe uma data inicial e uma final, no formato `YYYY-MM-DD` e filtra as transações daquele usuário
   - [x] Cria dal `filterTransactionsByDate`
   - [x] Implementa a rota
-- [ ] Não permitir que um usuário use o token de Outro
+- [x] Não permitir que um usuário use o token de Outro
 
   ```js
     Transactions.findAll({
@@ -122,7 +122,7 @@ app.get("/user/:id", function (req, res) {
 });
 ```
 
-- O formato da Data da query string deve ser YYYY-MM-DD hh:mm:ss
+- O formato da Data da query string deve ser YYYY-MM-DDThh:mm:ss.msZ
 
 - Ler os dados do Sequelize com dotenv
 
@@ -135,23 +135,3 @@ app.get("/user/:id", function (req, res) {
 - [Sequelize Operators](https://sequelize.org/docs/v6/core-concepts/model-querying-basics/)
 
 - [Sequelize Project](https://github.com/ibywaks/cookbook)
-
-## Estrutura do projeto
-
-- src
-  - db
-    - dal
-      - User.ts
-      - Transaction.ts
-    - model
-      - User.ts
-      - Transaction.ts
-  - api
-    - routes
-      - router.ts
-      - users.ts
-    - usecases
-      - CreateNewTransaction.ts
-  - middleware
-    - auth.ts
-    - index.ts
